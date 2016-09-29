@@ -1,0 +1,17 @@
+.project
+.settings
+.classpath
+target
+
+# LeanCloud
+.avoscloud
+.leancloud
+.avoscloud/
+*/target/*
+*.iml
+*/hsf/*
+.idea/*
+*/.classpath
+*/.project
+*/.settings
+.DS_Store
