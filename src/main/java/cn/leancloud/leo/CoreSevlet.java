@@ -89,15 +89,25 @@ public class CoreSevlet extends HttpServlet {
 
             try {
 
-                LeanMessage leanMessage = new LeanMessage();
-                leanMessage.put("msgId", responseMsg.getMsgId());
-                leanMessage.put("msgType", responseMsg.getMsgType());
-                leanMessage.put("fromUserName", responseMsg.getFromUserName());
-                leanMessage.put("toUserName", responseMsg.getToUserName());
+                LeanMessage fromLeanMsg = new LeanMessage();
+                fromLeanMsg.put("msgId", map.get("MsgId"));
+                fromLeanMsg.put("msgType", map.get("MsgType"));
+                fromLeanMsg.put("fromUserName", map.get("FromUserName"));
+                fromLeanMsg.put("toUserName", map.get("ToUserName"));
+                fromLeanMsg.put("content", map.get("Content"));
+                fromLeanMsg.save();
+
+                LeanMessage toLeanMsg = new LeanMessage();
+                toLeanMsg.put("msgId", responseMsg.getMsgId());
+                toLeanMsg.put("msgType", responseMsg.getMsgType());
+                toLeanMsg.put("fromUserName", responseMsg.getFromUserName());
+                toLeanMsg.put("toUserName", responseMsg.getToUserName());
                 if (responseMsg instanceof TextMsg) {
-                    leanMessage.put("content", ((TextMsg) responseMsg).getContent());
+                    toLeanMsg.put("content", ((TextMsg) responseMsg).getContent());
                 }
-                leanMessage.save();
+                toLeanMsg.save();
+
+
             } catch (Throwable throwable) {
                 logger.error("save msg error", throwable);
             }

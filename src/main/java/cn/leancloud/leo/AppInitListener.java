@@ -4,6 +4,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import cn.leancloud.leo.leando.LeanMessage;
+import com.avos.avoscloud.AVOSCloud;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +31,7 @@ public class AppInitListener implements ServletContextListener {
     logger.info("LeanEngine app init.");
     // 注册子类化
     AVObject.registerSubclass(Todo.class);
+    AVObject.registerSubclass(LeanMessage.class);
     // 初始化AVOSCloud，请保证在整个项目中间只初始化一次
     LeanEngine.initialize(appId, appKey, appMasterKey);
     // 在请求签名中使用masterKey以激活云代码的最高权限
