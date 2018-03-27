@@ -1,185 +1,21 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>cn.leancloud.demo</groupId>
-    <artifactId>java-war-getting-started</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
-
-    <name>java-war-getting-started</name>
-
-    <repositories>
-        <repository>
-            <id>leancloud</id>
-            <name>LeanCloud</name>
-            <url>http://mvn.leancloud.cn/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jettyVersion>9.3.10.v20160621</jettyVersion>
-        <spring.version>4.3.2.RELEASE</spring.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>cn.leancloud</groupId>
-            <artifactId>leanengine</artifactId>
-            <version>[0.1.6,0.2.0)</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.dom4j.dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-core</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-beans</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-aop</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context-support</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-tx</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-jdbc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-web</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-webmvc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-test</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-expression</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>19.0</version>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jettyVersion}</version>
-                <configuration>
-                    <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
-                    <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <stopKey>foo</stopKey>
-                    <stopPort>9999</stopPort>
-                    <httpConnector>
-                        <port>3000</port>
-                    </httpConnector>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <scanIntervalSeconds>0</scanIntervalSeconds>
-                            <daemon>true</daemon>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>stop-jetty</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+CREATE (alexAccount:Account { name:'Alex Rivilis', account_number: '1234', company:'Neo4j'})
+CREATE (Composite1:Composite { type:'C', name:'Composite1', id:'C1', product: ['A','CU','FA','FN']})CREATE (Composite2:Composite { type:'C', name:'Composite2', id:'C2', product: ['A','CU','FA','FN']})
+CREATE (Sleeve1:Sleeve { type:'SLC', name:'Sleeve1', id:'SLV1', product: ['A','CU','FA','FN']})CREATE (Sleeve2:Sleeve { type:'SLC', name:'Sleeve2', id:'SLV2', product: ['A','CU','FA','FN']})CREATE (Sleeve3:Sleeve { type:'SLC', name:'Sleeve3', id:'SLV3', product: ['A','CU','FA','FN']})CREATE (Sleeve4:Sleeve { type:'SLC', name:'Sleeve4', id:'SLV4', product: ['A','CU','FA','FN']})CREATE (Sleeve5:Sleeve { type:'SLC', name:'Sleeve5', id:'SLV5', product: ['A','CU','FA','FN']})
+CREATE (Fund51:Fund { id:'51', name:'Transportation', type: 'A', composite_name:'27',product:['A','FA','FN']})CREATE (Fund52:Fund { id:'52', name:'BioTech', type: 'A', composite_name:'27',product:['A','CU','FA','FN']})CREATE (Fund53:Fund { id:'53', name:'Financial', type: 'A', composite_name:'27',product:['A','CU','FA','FN']})CREATE (Fund73:Fund { id:'73', name:'Index 500', type: 'A', composite_name:'28',product:['A','CU','FA','FN']})
+CREATE (SoftFund51:Fund { id:'S51', name:'SubTransportation', type: 'A', composite_name:'27-1',product:'CU'})
+CREATE (HoldingF51_A:Holding {position:1471505.54, cusip:'38141W273', price:1, currency:'USD', trade_country:'US', investment_type:'45', value:1471505.54})CREATE (HoldingF51_B:Holding { position:11900, cusip:'99ZO13138', price:1.511699, currency:'USD', trade_country:'US', investment_type:'61',value:17989.2181})CREATE (HoldingF51_C:Holding { position:60695.55, cusip:'USD', price:1, currency:'USD', trade_country:'US', investment_type:'FC',value:60695.55})CREATE (HoldingF51_G:Holding { position:130000, cusip:'X7330ZBB7', price:109, currency:'USD', trade_country:'US', investment_type:'10',value:14170000})CREATE (HoldingF51_H:Holding { position:1026.45, cusip:'U0664NAA1', price:3.0, currency:'USD', trade_country:'US', investment_type:'30', value:3079.35})CREATE (HoldingF51_J:Holding { position:27520, cusip:'M10225AA4', price:88.25, currency:'USD', trade_country:'US', investment_type:'30', value:2428640})
+CREATE (HoldingF52_G:Holding { position:210500, cusip:'X7330ZBB7', price:109, currency:'USD', trade_country:'US', investment_type:'10',value:22944500})CREATE (HoldingF52_H:Holding { position:11001, cusip:'U0664NAA1', price:3.0, currency:'USD', trade_country:'US', investment_type:'30', value:33003})CREATE (HoldingF52_C:Holding { position:10010101.65, cusip:'USD', price:1, currency:'USD', trade_country:'US', investment_type:'FC',value:10010101.65})CREATE (HoldingF52_I:Holding { position:14000, cusip:'P0607JAE8', price:105.4, currency:'USD', trade_country:'US', investment_type:'30', value:1575600})CREATE (HoldingF52_J:Holding { position:513, cusip:'M10225AA4', price:88.25, currency:'USD', trade_country:'US', investment_type:'30', value:45272.25})CREATE (HoldingF52_K:Holding { position:31010, cusip:'G5960L103', price:75.00, currency:'USD', trade_country:'US', investment_type:'41', value:2325750})
+CREATE (HoldingF53_A:Holding { position:512360.54, cusip:'38141W273', price:1, currency:'USD', trade_country:'US', investment_type:'45', value:512360.54})CREATE (HoldingF53_B:Holding { position:15023, cusip:'99ZO13138', price:1.511699, currency:'USD', trade_country:'US', investment_type:'61',value:22710.254077})CREATE (HoldingF53_D:Holding { position:1134, cusip:'99S0RM5C4', price:0, currency:'USD', trade_country:'US', investment_type:'54', value:0})CREATE (HoldingF53_F:Holding { position:150000, cusip:'Y85516AA3', price:96.75, currency:'USD', trade_country:'US', investment_type:'30', value:14512500})CREATE (HoldingF53_J:Holding { position:1126.4, cusip:'M10225AA4', price:88.25, currency:'USD', trade_country:'US', investment_type:'30', value:99409.2125})CREATE (HoldingF53_L:Holding { position:304521, cusip:'C9413PAP8', price:96.00, currency:'USD', trade_country:'CA', investment_type:'BL', value:29234016})
+CREATE (HoldingF73_A:Holding { position:215605.54, cusip:'38141W273', price:1, currency:'USD', trade_country:'US', investment_type:'45', value:215605.54})CREATE (HoldingF73_C:Holding { position:230045.21, cusip:'USD', price:1, currency:'USD', trade_country:'US', investment_type:'FC',value:230045.21})CREATE (HoldingF73_E:Holding { position:30000, cusip:'99S0ROK74', price:302.011788, currency:'USD', trade_country:'US', investment_type:'55', value:9060353.64})CREATE (HoldingF73_H:Holding { position:40000, cusip:'U0664NAA1', price:3.0, currency:'USD', trade_country:'US', investment_type:'30', value:120000})CREATE (HoldingF73_K:Holding { position:1000, cusip:'G5960L103', price:75.00, currency:'USD', trade_country:'US', investment_type:'41', value:75000})CREATE (HoldingF73_L:Holding { position:1500, cusip:'C9413PAP8', price:96.00, currency:'USD', trade_country:'CA', investment_type:'BL', value:144000})
+CREATE (Fund51) -[:holds]-> (HoldingF51_A )CREATE (Fund51) -[:holds]-> (HoldingF51_B)CREATE (Fund51) -[:holds]-> (HoldingF51_C)CREATE (Fund51) -[:holds]-> (HoldingF51_G)CREATE (Fund51) -[:holds]-> (HoldingF51_H)CREATE (Fund51) -[:holds]-> (HoldingF51_J)
+CREATE (SoftFund51) -[:holds]-> (HoldingF51_A )CREATE (SoftFund51) -[:holds]-> (HoldingF51_B)CREATE (SoftFund51) -[:holds]-> (HoldingF51_C)
+CREATE (Fund52) -[:holds]-> (HoldingF52_G)CREATE (Fund52) -[:holds]-> (HoldingF52_H)CREATE (Fund52) -[:holds]-> (HoldingF52_C)CREATE (Fund52) -[:holds]-> (HoldingF52_I)CREATE (Fund52) -[:holds]-> (HoldingF52_J)CREATE (Fund52) -[:holds]-> (HoldingF52_K)
+CREATE (Fund53) -[:holds]-> (HoldingF53_A)CREATE (Fund53) -[:holds]-> (HoldingF53_B)CREATE (Fund53) -[:holds]-> (HoldingF53_D)CREATE (Fund53) -[:holds]-> (HoldingF53_F)CREATE (Fund53) -[:holds]-> (HoldingF53_J)CREATE (Fund53) -[:holds]-> (HoldingF53_L)
+CREATE (Fund73) -[:holds]-> (HoldingF73_A)CREATE (Fund73) -[:holds]-> (HoldingF73_C)CREATE (Fund73) -[:holds]-> (HoldingF73_E)CREATE (Fund73) -[:holds]-> (HoldingF73_H)CREATE (Fund73) -[:holds]-> (HoldingF73_K)CREATE (Fund73) -[:holds]-> (HoldingF73_L)
+CREATE (Composite1) -[:owns_c { inserted:'12/06/2005' } ] ->( Sleeve1)CREATE (Composite1) -[:owns_c { inserted:'12/06/2005' } ] ->( Sleeve2)
+CREATE (Sleeve1) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund51)CREATE (Sleeve1) -[:owns_c { inserted:'12/06/2005' } ] ->( SoftFund51)CREATE (Sleeve1) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund52)CREATE (Sleeve2) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund53)CREATE (Sleeve2) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund73)
+CREATE (Composite2) -[:owns_c { inserted:'12/06/2005' } ] ->( Sleeve3)CREATE (Composite2) -[:owns_c { inserted:'12/06/2005' } ] ->( Sleeve4)CREATE (Composite2) -[:owns_c { inserted:'12/06/2005' } ] ->( Sleeve5)
+CREATE (Sleeve3) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund52)CREATE (Sleeve3) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund53)
+CREATE (Sleeve4) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund53)CREATE (Sleeve4) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund73)
+CREATE (Sleeve5) -[:owns_c { inserted:'12/06/2005' } ] ->( SoftFund51)CREATE (Sleeve5) -[:owns_c { inserted:'12/06/2005' } ] ->( Fund73)
+CREATE (alexAccount) -[:owns_c { inserted:'12/06/2005' } ] ->( Composite1)CREATE (alexAccount) -[:owns_c { inserted:'12/06/2005' } ] ->( Composite2)
